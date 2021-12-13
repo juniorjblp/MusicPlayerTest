@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerTest.Uteis
 {
-    public class iTunesResult
+    public class StreamingReturn
     {
-        public static string iTunesReturn(string ArtistName, string SongName)
+        public static string iTunesReturn(string RadioUrl)
         {
-            HttpWebRequest requisicao = (HttpWebRequest)WebRequest.Create("https://itunes.apple.com/search?term=" + ArtistName + " " + SongName + "&media=music&limit=1");
+            HttpWebRequest requisicao = (HttpWebRequest)WebRequest.Create("https://streaming." + RadioUrl + "/status-json.xsl");
             HttpWebResponse resposta = (HttpWebResponse)requisicao.GetResponse();
             int cont;
             byte[] buffer = new byte[1000];
@@ -28,7 +27,6 @@ namespace MusicPlayerTest.Uteis
 
             } while (cont > 0);
             return sb.ToString();
-
         }
     }
 }
